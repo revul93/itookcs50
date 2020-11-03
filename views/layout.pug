@@ -1,0 +1,41 @@
+doctype
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(name='description', content='A place for CS50 Graduates to share thoughts')
+        meta(name='author', content='Omar Jajah')
+
+        title I took CS50!
+
+        link(href='/public/css/bootstrap.min.css', rel='stylesheet')
+        link(href='/public/css/font-awesome.min.css', rel='stylesheet')
+        link(href='public/css/style.css', rel='stylesheet')
+
+        script(src='/public/js/html5shiv.min.js')
+        script(src='/public/js/respond.min.js')
+    body.bg-dark
+        nav.navbar.bg-light
+            ul.navbar-list
+                li.navbar-item
+                    a.navbar-link(href="/home") Home
+                li.navbar-item
+                    a.navbar-link(href="/graduates") Graduates
+                li.navbar-item
+                    a.navbar-link(href="/thoughts") Thoughts
+            ul.navbar-list
+                li.navbar-item
+                    button.btn.btn-md.btn-light Login
+                li.navbar-item
+                    button.btn.btn-md.btn-dark Register
+                    
+        div.display-4.text-center.bg-dark.text-light.p-2 I took CS50!
+
+
+        block body
+
+        block script
+        script(src="/public/js/jquery-3.5.1.slim.min.js")
+        script(src="/public/js/popper.min.js")
+        script(src="/public/js/bootstrap.min.js")

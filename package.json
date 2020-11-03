@@ -1,0 +1,31 @@
+{
+  "name": "itookcs50",
+  "version": "1.0.0",
+  "description": "itookcs50 is a place for CS50 graduates to share thoughts",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^4.1.1",
+    "pug": "^3.0.0",
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/revul93/itookcs50.git"
+  },
+  "author": "Omar Jajah",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/revul93/itookcs50/issues"
+  },
+  "homepage": "https://github.com/revul93/itookcs50#readme"
+}
