@@ -1,0 +1,21 @@
+extends layout.pug
+
+block body
+    h2.display-5.text-center.text-light Login
+    form.text-light
+        .form-group
+            label(for='exampleInputEmail1') Email address
+            input#exampleInputEmail1.form-control(type='email' aria-describedby='emailHelp' placeholder='Enter email')
+            small#emailHelp.form-text.text-muted We&apos;ll never share your email with anyone else.
+        .form-group
+            label(for='exampleInputPassword1') Password
+            input#exampleInputPassword1.form-control(type='password' placeholder='Password')
+        .form-group.form-check
+            input#exampleCheck1.form-check-input(type='checkbox')
+            label.form-check-label(for='exampleCheck1') Check me out
+        button.btn.btn-primary(type='submit') Submit
+
+    h2.display-5.text-center.text-light Or
+
+    h3.text-center.text-light Login with your 
+        a(href="https://github.com/login") Github account

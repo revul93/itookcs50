@@ -1,13 +1,14 @@
 require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
 
-let prodMode = process.env.NODE_ENV === 'development' ? false : true;
+let prodMode = 'production';
+// let prodMode = process.env.NODE_ENV === 'development' ? false : true;
 
 const sequelize = new Sequelize(
   `sqlite://${prodMode ? 'prod' : 'dev'}DB.sqlite`,
   {
     logging: !prodMode,
-  },
+  }
 );
 
 // Model definition
@@ -67,9 +68,11 @@ User.hasMany(Thought);
 Thought.hasMany(Comment);
 User.hasMany(Comment);
 
-sequelize
-  .sync()
-  .then(() => console.log('All models synced'))
-  .catch(() => console.error('Failed syncing models to db'));
+const dbConnect = async () => {
+  await sequelize
+    .sync()
+    .then(() => console.log('All models synced'))
+    .catch(() => console.error('Failed syncing models to db'));
+};
 
-module.exports = { sequelize, User, Project, Thought, Comment };
+module.exports = { dbConnect, User, Project, Thought, Comment };

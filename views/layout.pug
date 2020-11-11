@@ -1,4 +1,4 @@
-doctype
+doctype html
 html(lang='en')
     head
         meta(charset='utf-8')
@@ -17,23 +17,24 @@ html(lang='en')
         script(src='/public/js/respond.min.js')
     body.bg-dark
         nav.navbar.bg-light
-            ul.navbar-list
-                li.navbar-item
+            ul.list-inline.navbar-list
+                li.list-inline-item.navbar-item
                     a.navbar-link(href="/home") Home
-                li.navbar-item
+                li.list-inline-item.navbar-item
                     a.navbar-link(href="/graduates") Graduates
-                li.navbar-item
+                li.list-inline-item.navbar-item
                     a.navbar-link(href="/thoughts") Thoughts
-            ul.navbar-list
-                li.navbar-item
-                    button.btn.btn-md.btn-light Login
-                li.navbar-item
-                    button.btn.btn-md.btn-dark Register
-                    
-        div.display-4.text-center.bg-dark.text-light.p-2 I took CS50!
-
-
-        block body
+            ul.list-inline.navbar-list
+                if user
+                    li.list-inline-item.navbar-item
+                        a.navbar-link(href="/profile")= user.name
+                    li.list-inline-item.navbar-item
+                        a.navbar-link(href="/logout") Logout 
+                else
+                    li.list-inline-item.navbar-item
+                        a.navbar-link(href="/ghlogin") Login with Github
+        main.container
+            block body
 
         block script
         script(src="/public/js/jquery-3.5.1.slim.min.js")
