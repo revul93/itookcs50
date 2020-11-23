@@ -1,0 +1,19 @@
+extends layout.pug
+
+block body
+    h2.text-center.bg-dark.text-light.p-2.mt-3 Latest thoughts about CS50
+    if (user)
+        a.btn.btn-outline-warning.btn-lg.m-3(href="/shareThought") + Share thought
+    else
+        a.btn.btn-outline-warning.btn-lg.m-3(href="/ghlogin") Login to share your thoughts
+
+    if (!thoughts)
+        h3.text-center.text-warning.p-3.m-5 No thoughts shared yet!
+    else
+        ul.list-unstyled.d-flex.flex-column.align-items-center
+            each thought in thoughts
+                li.w-100.m-3.p-2.text-dark.border.border-dark.rounded.d-flex.flex-column.thought-box
+                    div
+                        img(src=user.profile_picture)
+                    hr.m-2.bg-dark.border.border-dark.rounded
+                    .dvi= `${thought.text}` 

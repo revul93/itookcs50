@@ -1,23 +1,18 @@
 require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
 
-let prodMode = 'production';
-// let prodMode = process.env.NODE_ENV === 'development' ? false : true;
+let prodMode = process.env.NODE_ENV === 'development' ? false : true;
 
 const sequelize = new Sequelize(
   `sqlite://${prodMode ? 'prod' : 'dev'}DB.sqlite`,
   {
-    logging: !prodMode,
+    logging: false,
   }
 );
 
 // Model definition
 const User = sequelize.define('User', {
   name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  password: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -29,8 +24,6 @@ const User = sequelize.define('User', {
       isEmail: true,
     },
   },
-  birthdate: DataTypes.DATE,
-  country: DataTypes.STRING,
   github_profile: DataTypes.STRING,
   profile_picture: DataTypes.STRING,
 });
@@ -50,10 +43,13 @@ const Thought = sequelize.define('Thought', {
     allowNull: false,
   },
   text: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
-  thumb_counter: DataTypes.INTEGER,
+  thumb_counter: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
 });
 const Comment = sequelize.define('Comment', {
   text: {

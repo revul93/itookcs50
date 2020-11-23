@@ -9,7 +9,49 @@ body {
   height: 100%;
 }
 
-.navbar-list {
+.navbar-link {
+  color: var(--dark);
+  font-size: 120%;
+}
+
+.navbar-link:hover {
+  text-decoration: none;
+  color: var(--light);
+  background-color: var(--dark);
+}
+
+.active {
+  font-weight: bold;
+}
+
+.link {
+  color: var(--primary);
+}
+
+.link:hover {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.form-label {
+  font-size: 125%;
+}
+
+.submit-spinner {
+  width: 80px;
+  height: 50px;
+}
+
+.thought-box {
+  -webkit-box-shadow: 8px 6px 18px 3px #000000;
+  box-shadow: 8px 6px 18px 3px #000000;
+  background-color: darkgray;
+}
+
+hr {
+  padding: 1.5px;
+  opacity: 0.6;
 }
 
 /* Small devices (landscape phones, 576px and up) */

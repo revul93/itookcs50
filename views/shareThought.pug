@@ -1,0 +1,79 @@
+extends layout.pug
+
+block body
+    h2.text-center.bg-dark.text-light.p-2.mt-5 Add a thought
+    #errorMessage.alert.alert-danger.alert-dismissible.fade.show.d-none(role="alert")
+        strong REQUEST FAILED!  
+        | Server encounter an error while processing your request. Please try again later.
+        button.close(type="button" data-dismiss="alert" aria-label="Close")
+            span(aria-hidden="true") &times;
+
+    form.text-light.mt-3(id="shareThoughtForm" method="POST")
+        .form-group
+            label.form-label(for='subjectInput') Subject
+            input#subjectInput.form-control(name="subject" type='text' placeholder='Give a relative subject')
+            small#subjectErrorAlert.form-text.text-danger.d-none Please input a subject 
+        .form-group
+            label.form-label(for='textInput') Text
+            textarea#textInput.form-control(name="text" placeholder="What you want to share?" rows="15")
+            small#textErrorAlert.form-text.text-danger.d-none Please input a subject
+            small.form-text.text-muted
+            | You can use 
+            a.link(href="https://www.markdownguide.org/cheat-sheet/" target="_blank") Markdown!
+        button#submit-button.btn.btn-primary(type='submit') Submit
+
+block script
+    script.
+        var submitButton = document.getElementById('submit-button');
+        var spinner = document.createElement('img');
+        spinner.setAttribute('src', '/public/img/submit-spinner.gif');
+        spinner.setAttribute('class', 'submit-spinner');
+
+        document
+            .getElementById('shareThoughtForm')
+            .addEventListener('submit', async (event) => {
+                event.preventDefault();
+                submitButton.replaceWith(spinner);
+                if (event.target['subject'].value && event.target['text'].value) {
+                    try {
+                        const response = await fetch('/shareThought', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                subject: event.target['subject'].value,
+                                text: event.target['text'].value
+                            })
+                        })
+
+                        if (response.status !== 200) {
+                            document.getElementById('errorMessage').classList.remove('d-none')
+                            spinner.replaceWith(submitButton)
+                            return;
+                        }
+
+                        const data = await response.json();
+                        if (!alert(data.message)) {
+                            location.href = "/thoughts";
+                        }
+                    } catch (error) {
+                        console.error(error)
+                    }
+                }
+                else {
+                    if (event.target['subject'].value === '') {
+                        event.target['subject'].style.outline = '1px solid red'
+                        document.getElementById('subjectErrorAlert').classList.remove('d-none')
+                    }
+                    if (event.target['text'].value === '') {
+                        event.target['text'].style.outline = '1px solid red'
+                        document.getElementById('textErrorAlert').classList.remove('d-none')
+                    }
+                }
+                spinner.replaceWith(submitButton)
+            });
+
+
+
+
