@@ -1,9 +1,9 @@
 extends layout.pug
 
 block body
-    h2.text-center.bg-dark.text-light.p-2.mt-3 Latest thoughts about CS50
+    h2.text-center.bg-dark.text-light.p-2.mt-3 Latest thoughts from CS50 takers!
     if (user)
-        a.btn.btn-outline-warning.btn-lg.m-3(href="/shareThought") + Share thought
+        a.btn.btn-outline-warning.btn-lg.m-3(href="/share-thought") + Share thought
     else
         a.btn.btn-outline-warning.btn-lg.m-3(href="/ghlogin") Login to share your thoughts
 
@@ -12,8 +12,25 @@ block body
     else
         ul.list-unstyled.d-flex.flex-column.align-items-center
             each thought in thoughts
-                li.w-100.m-3.p-2.text-dark.border.border-dark.rounded.d-flex.flex-column.thought-box
-                    div
-                        img(src=user.profile_picture)
-                    hr.m-2.bg-dark.border.border-dark.rounded
-                    .dvi= `${thought.text}` 
+                - var thumbs = JSON.parse(thought.thumbs)
+                - var isThumbed = thumbs && thumbs.includes(user.id)
+                li.w-100.m-3.p-4.text-dark.border.border-dark.rounded.d-flex.flex-column.thought-box
+                    div.d-flex.flex-row
+                        img.thought-user-image(src=thought.User.profile_picture)
+                        a.link.font-weight-bold.align-self-center.m-3(target="_blank" href=`${thought.User.github_profile}`)= thought.User.name
+                    hr.m-2.border.rounded
+                    .thought-text.m-2= `${thought.text}`
+                    .align-self-center
+                        i.btn.thumb-icon.fa.fa-2x.text-dark(class=isThumbed ? 'fa-thumbs-up' : 'fa-thumbs-o-up' onClick="thumb(event)" aria-hidden="true" data-id=thought.id)
+                        span.thumb-counter.m-3.text-dark.thumb-counter= thumbs ? thumbs.length : 0
+
+    nav(aria-label='Page navigation')
+        ul.pagination.justify-content-center.pagination-lg.m-4.mb-4
+            each page in range(Math.floor(thoughtsCount / 10), 1)
+                li.page-item
+                    a.page-link(href=`/thoughts/${page}`)= page 
+
+                    
+block script
+    script(src="/public/js/thumb.js")
+    script(src="/public/js/utils.js" type="module")

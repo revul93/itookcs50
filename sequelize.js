@@ -7,7 +7,7 @@ const sequelize = new Sequelize(
   `sqlite://${prodMode ? 'prod' : 'dev'}DB.sqlite`,
   {
     logging: false,
-  }
+  },
 );
 
 // Model definition
@@ -37,6 +37,7 @@ const Project = sequelize.define('Project', {
   screenshot: DataTypes.STRING,
   thump_counter: DataTypes.INTEGER,
 });
+
 const Thought = sequelize.define('Thought', {
   subject: {
     type: DataTypes.STRING,
@@ -46,9 +47,8 @@ const Thought = sequelize.define('Thought', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  thumb_counter: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
+  thumbs: {
+    type: DataTypes.STRING,
   },
 });
 const Comment = sequelize.define('Comment', {
@@ -60,7 +60,9 @@ const Comment = sequelize.define('Comment', {
 
 // Model relations
 User.hasOne(Project);
+Project.belongsTo(User);
 User.hasMany(Thought);
+Thought.belongsTo(User);
 Thought.hasMany(Comment);
 User.hasMany(Comment);
 

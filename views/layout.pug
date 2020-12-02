@@ -16,18 +16,18 @@ html(lang='en')
 
         script(src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv-printshiv.min.js" integrity="sha256-tCp+lJpuIdZrMPu7SiLer9ngzKvATw+ikH/GJS/fFl8=" crossorigin="anonymous")        
     body.bg-dark
-        nav.navbar.bg-warning.p-0
+        nav.navbar.bg-warning
             ul.list-inline.m-0
                 li.list-inline-item.navbar-item.m-0
                     a.navbar-link.d-flex.p-2(href="/home") Home
                 li.list-inline-item.navbar-item.m-0
                     a.navbar-link.d-flex.p-2(href="/graduates") Graduates
                 li.list-inline-item.navbar-item.m-0
-                    a.navbar-link.d-flex.p-2(href="/thoughts") Thoughts
+                    a.navbar-link.d-flex.p-2(href="/thoughts/1") Thoughts
             ul.list-inline.m-0
                 if user
                     li.list-inline-item.navbar-item.m-0
-                        a.navbar-link.d-flex.p-2(href="/profile")= user.name
+                        a.navbar-link.d-flex.p-2(href=user.github_profile target="_blank")= user.name
                     li.list-inline-item.navbar-item.m-0
                         a.navbar-link.d-flex.p-2(href="/logout") Logout 
                 else
@@ -37,17 +37,12 @@ html(lang='en')
                             | Github Login
         .display-4.text-center.bg-light.text-dark.p-2.font-weight-bold I took CS50!
 
-        main.container
+        main.container.pb-5
             block body
 
         block script
-        script.
-            document.querySelectorAll('.navbar-link').forEach((link) => {
-                if (link.href.includes(document.location.href)) {
-                    link.classList.add('active');
-                }
-            });
 
+        script(src="/public/js/activeNavItem.js")
         script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous")
         script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous")
         script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous")
