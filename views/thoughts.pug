@@ -19,18 +19,20 @@ block body
                         img.thought-user-image(src=thought.User.profile_picture)
                         a.link.font-weight-bold.align-self-center.m-3(target="_blank" href=`${thought.User.github_profile}`)= thought.User.name
                     hr.m-2.border.rounded
+                    .tohught-subhect= thought.subject
                     .thought-text.m-2= `${thought.text}`
+                    .thought.date= thought.createdAt
                     .align-self-center
                         i.btn.thumb-icon.fa.fa-2x.text-dark(class=isThumbed ? 'fa-thumbs-up' : 'fa-thumbs-o-up' onClick="thumb(event)" aria-hidden="true" data-id=thought.id)
                         span.thumb-counter.m-3.text-dark.thumb-counter= thumbs ? thumbs.length : 0
 
+block end
     nav(aria-label='Page navigation')
         ul.pagination.justify-content-center.pagination-lg.m-4.mb-4
-            each page in range(Math.floor(thoughtsCount / 10), 1)
+            each page in utils.range(Math.ceil(thoughtsCount / 10))
                 li.page-item
-                    a.page-link(href=`/thoughts/${page}`)= page 
+                    a.page-link(class=(page + 1 == pageNumber ? 'active' : '') href=(page + 1 == pageNumber ? '#' : `/thoughts/${page + 1}`))= page + 1
 
-                    
+
 block script
     script(src="/public/js/thumb.js")
-    script(src="/public/js/utils.js" type="module")

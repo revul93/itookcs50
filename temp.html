@@ -9,7 +9,7 @@
       content="A place for CS50 Graduates to share thoughts"
     />
     <meta name="author" content="Omar Jajah" />
-    <title>I took CS50! - Thoughts</title>
+    <title>I took CS50! - Thoughts - Page 1</title>
     <link rel="icon" href="public/img/favicon.ico" type="image/x-icon" />
     <link
       rel="stylesheet"
@@ -40,90 +40,42 @@
           <a class="navbar-link d-flex p-2" href="/graduates">Graduates</a>
         </li>
         <li class="list-inline-item navbar-item m-0">
-          <a class="navbar-link d-flex p-2" href="/thoughts">Thoughts</a>
+          <a class="navbar-link d-flex p-2" href="/thoughts/1">Thoughts</a>
         </li>
       </ul>
       <ul class="list-inline m-0">
-        <li class="list-inline-item navbar-item">
-          <a class="navbar-link d-flex p-2" href="/ghlogin"
-            ><i class="fa fa-github fa-lg m-1" aria-hidden="true"></i>Github
-            Login</a
+        <li class="list-inline-item navbar-item m-0">
+          <a
+            class="navbar-link d-flex p-2"
+            href="https://github.com/revul93"
+            target="_blank"
+            >Omar Jajah</a
           >
+        </li>
+        <li class="list-inline-item navbar-item m-0">
+          <a class="navbar-link d-flex p-2" href="/logout">Logout </a>
         </li>
       </ul>
     </nav>
     <div class="display-4 text-center bg-light text-dark p-2 font-weight-bold">
       I took CS50!
     </div>
-    <main class="container">
+    <main class="container pb-5">
       <h2 class="text-center bg-dark text-light p-2 mt-3">
         Latest thoughts from CS50 takers!
       </h2>
-      <a class="btn btn-outline-warning btn-lg m-3" href="/ghlogin"
-        >Login to share your thoughts</a
+      <a class="btn btn-outline-warning btn-lg m-3" href="/share-thought"
+        >+ Share thought</a
       >
-      <ul class="list-unstyled d-flex flex-column align-items-center">
-        <li
-          class="w-100 m-3 p-4 text-dark border border-dark rounded d-flex flex-column thought-box"
-        >
-          <div class="d-flex flex-row">
-            <img
-              class="thought-user-image"
-              src="https://avatars0.githubusercontent.com/u/22988929?v=4"
-            /><a
-              class="link font-weight-bold align-self-center m-3"
-              target="_blank"
-              href="https://github.com/revul93"
-              >Omar Jajah</a
-            >
-          </div>
-          <hr class="m-2 border rounded" />
-          <div class="thought-text m-2">I have learned a lot!</div>
-          <div class="align-self-center">
-            <i
-              class="btn thumb-icon fa fa-2x fa-thumbs-o-up text-dark"
-              onClick="thumb(event)"
-              aria-hidden="true"
-              data-id="2"
-            ></i
-            ><span class="thumb-counter m-3 text-dark thumb-counter">2</span>
-          </div>
-        </li>
-      </ul>
+      <ul class="list-unstyled d-flex flex-column align-items-center"></ul>
+      <nav aria-label="Page navigation">
+        <ul
+          class="pagination justify-content-center pagination-lg m-4 mb-4"
+        ></ul>
+      </nav>
     </main>
-    <script>
-      function thumb(event) {
-        event.preventDefault();
-        var thumbIcon = event.target;
-        var thumbCounter = event.target.nextElementSibling;
-        fetch({
-          url: '/thumb',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: {
-            thoughtId: thought.id,
-          },
-        });
-        if (thumbIcon.classList.contains('fa-thumbs-o-up')) {
-          thumbIcon.classList.remove('fa-thumbs-o-up');
-          thumbIcon.classList.add('fa-thumbs-up');
-          thumbCounter.innerText = +thumbCounter.innerText + 1;
-        } else if (thumbIcon.classList.contains('fa-thumbs-up')) {
-          thumbIcon.classList.remove('fa-thumbs-up');
-          thumbIcon.classList.add('fa-thumbs-o-up');
-          thumbCounter.innerText = +thumbCounter.innerText - 1;
-        }
-      }
-    </script>
-    <script>
-      document.querySelectorAll('.navbar-link').forEach((link) => {
-        if (link.href.includes(document.location.href)) {
-          link.classList.add('active');
-        }
-      });
-    </script>
+    <script src="/public/js/thumb.js"></script>
+    <script src="/public/js/activeNavItem.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

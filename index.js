@@ -18,8 +18,7 @@ const { dbConnect } = require('./sequelize');
 const app = express();
 const router = require('./router');
 app.set('view engine', 'pug');
-app.set('view options', { pretty: true });
-
+app.locals.pretty = true;
 // use middleware
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -36,6 +35,7 @@ app.use(
           'https',
           'cdn.jsdelivr.net',
           'code.jquery.com',
+          'unpkg.com',
         ],
         styleSrc: ["'self'", "'unsafe-inline'", 'https', 'cdn.jsdelivr.net'],
         imgSrc: ["'self'", '*.githubusercontent.com'],
@@ -44,7 +44,7 @@ app.use(
         upgradeInsecureRequests: [],
       },
     },
-  }),
+  })
 );
 app.use(setAuth);
 

@@ -3,6 +3,7 @@ const router = require('express').Router();
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const chalk = require('chalk');
+const { range } = require('./utils');
 
 // models
 const { User, Thought } = require('./sequelize');
@@ -26,7 +27,7 @@ router.get('/home', (req, res) => {
 // github login
 router.get('/ghlogin', (req, res) => {
   res.redirect(
-    `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}`,
+    `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}`
   );
 });
 
@@ -51,7 +52,7 @@ router.get('/login', async (req, res) => {
         headers: {
           Accept: 'application/json',
         },
-      },
+      }
     );
 
     // get user from github
@@ -105,31 +106,35 @@ router.get('/graduates', (req, res) => {
   res.render('index', { title: 'Graduates', user: req.user });
 });
 
-router.get('/thoughts/:page', async (req, res) => {
+router.get('/thoughts/:index', async (req, res) => {
   try {
-    const { page } = req.params;
+    const { index } = req.params;
     let thoughtsCount = await Thought.count();
-    if (page > Math.ceil(thoughtsCount / 10)) {
-      throw new Error('Max page exceeded!');
+    if (index > 1 && index > Math.ceil(thoughtsCount / 10)) {
+      throw new Error('Error: Page index exceeded');
     }
 
     let thoughts = await Thought.findAll({
+      order: ['createdAt'],
       include: User,
       limit: 10,
-      offset: (page - 1) * 10,
+      offset: (index - 1) * 10,
     });
 
-    res.cookie('history', `/thoughts/${page}`);
+    res.cookie('history', `/thoughts/${index}`);
     return res.render('thoughts', {
-      title: `Thoughts - Page ${page}`,
+      title: `Thoughts - Page ${index}`,
       user: req.user,
       // convert thought to JSON, so Pug can iterate it
       thoughts: thoughts.map((thought) => thought.toJSON()),
-      pageNumber: page,
+      pageNumber: index,
       thoughtsCount,
+      utils: {
+        range,
+      },
     });
   } catch (error) {
-    console.error(error.message);
+    console.error(error);
     return res.status(500).json({ message: error.message });
   }
 });

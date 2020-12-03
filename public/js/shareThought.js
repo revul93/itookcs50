@@ -26,13 +26,16 @@ document
           spinner.replaceWith(submitButton);
           return;
         }
-
-        const data = await response.json();
-        if (!alert(data.message)) {
+        swal(
+          'Thought shared!',
+          'Click OK to go back to Thoughts page',
+          'success'
+        ).then(() => {
           location.href = '/thoughts/1';
-        }
+        });
       } catch (error) {
         console.error(error);
+        swal('Failure', error.message, 'error');
       }
     } else {
       if (event.target['subject'].value === '') {
