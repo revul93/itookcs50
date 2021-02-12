@@ -17,7 +17,8 @@
     "chalk": "^4.1.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "sequelize-cli": "^6.2.0"
   },
   "scripts": {
     "dev": "nodemon index.js",

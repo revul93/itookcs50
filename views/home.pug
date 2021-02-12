@@ -1,0 +1,34 @@
+extends layout.pug
+
+block body
+    img.img-fluid.rounded.mx-auto.d-block.mt-3(alt="CS50 Image" src="/public/img/cs50.png")
+    h3.display-5.m-3.text-light.text-center Welcome CS50 takers!
+    p.text-light.text-center.bigger-text
+        | This is a one place to 
+        a(href="/share-thought") Share your thought 
+        | or 
+        a(href="/thoughts/1") view others 
+        | about CS50 course!
+        br 
+        | Inspire some ideas for your 
+        a(href="/final-projects") final project. 
+        | Or 
+        a(href="/project") show yours.
+    
+    .d-flex.flex-column.flex-md-row.justify-content-between.mt-2
+        .rounded.bg-danger.p-3.mt-2.info-card.mx-auto
+            p.text-light.text-center.bold-text.bigger-text What is CS50?
+            p.text-light.text-center.big-text
+                | CS50 is an introductory, yet a wonderful course in the field of computer scinece and the art of programming!
+                br
+                a(href="https://cs50.harvard.edu" target="_blank") Learn more
+
+        .rounded.bg-danger.p-3.mt-2.info-card.mx-auto
+            p.text-light.text-center.bold-text.bigger-text Why I built this?
+            p.text-light.text-center.big-text
+                | I struggled for too long in my final project. I want to come with a real app the solves a problem. Then, I thought that must be a website for CS50 students who are about to graduate to inspire ideas for final projects.
+                br
+                | and that's WHY!
+
+block end
+    footer Terms of usage

@@ -9,7 +9,7 @@ const { range } = require('./utils');
 const { User, Thought } = require('./sequelize');
 
 // middleware
-const { auth } = require('./middleware');
+const { auth, reAuth } = require('./middleware');
 
 require('dotenv').config();
 
@@ -18,10 +18,10 @@ router.get('/', (req, res) => {
   res.redirect('/home');
 });
 
-router.get('/home', (req, res) => {
+router.get('/home', reAuth, (req, res) => {
   // track history
   res.cookie('history', '/home');
-  res.render('index', { title: 'Home', user: req.user });
+  res.render('home', { title: 'Home', user: req.user });
 });
 
 // github login
@@ -101,17 +101,17 @@ router.get('/logout', (req, res) => {
   res.redirect('/home');
 });
 
-router.get('/graduates', (req, res) => {
+router.get('/graduates', reAuth, (req, res) => {
   res.cookie('history', '/graduates');
-  res.render('index', { title: 'Graduates', user: req.user });
+  res.render('graduates', { title: 'Graduates', user: req.user });
 });
 
-router.get('/thoughts/:index', async (req, res) => {
+router.get('/thoughts/:index', reAuth, async (req, res) => {
   try {
     const { index } = req.params;
     let thoughtsCount = await Thought.count();
     if (index > 1 && index > Math.ceil(thoughtsCount / 10)) {
-      throw new Error('Error: Page index exceeded');
+      return res.redirect(`/thoughts/${index - 1}`);
     }
 
     let thoughts = await Thought.findAll({
@@ -139,31 +139,11 @@ router.get('/thoughts/:index', async (req, res) => {
   }
 });
 
-// router.get('/thoughts', async (req, res) => {
-//   try {
-//     // TODO: implement pagination
-//     let thoughts = await Thought.findAll({
-//       include: User,
-//     });
-
-//     res.cookie('history', '/thoughts');
-//     res.render('thoughts', {
-//       title: 'Thoughts',
-//       user: req.user,
-//       // convert thought to JSON, so Pug can iterate it
-//       thoughts: thoughts.map((thought) => thought.toJSON()),
-//     });
-//   } catch (error) {
-//     console.error(error.message);
-//     return res.status(500).json({ message: error.message });
-//   }
-// });
-
-router.get('/share-thought', auth, (req, res) => {
+router.get('/share-thought', [auth, reAuth], (req, res) => {
   res.render('shareThought', { title: 'Share Thought', user: req.user });
 });
 
-router.post('/shareThought', auth, async (req, res) => {
+router.post('/shareThought', [auth, reAuth], async (req, res) => {
   // check for required fields
   const { subject, text } = req.body;
   if (!subject || !text) {
@@ -184,7 +164,7 @@ router.post('/shareThought', auth, async (req, res) => {
   }
 });
 
-router.post('/thumb', auth, async (req, res) => {
+router.post('/thumb', [auth, reAuth], async (req, res) => {
   // get params from body
   const { thoughtId } = req.body;
   if (!thoughtId) {
@@ -226,6 +206,28 @@ router.post('/thumb', auth, async (req, res) => {
     return res.json(thought);
   } catch (error) {
     console.error(chalk.red(error.message));
+    return res.status(500).json({ message: error.message });
+  }
+});
+
+router.delete('/deleteThought', [auth, reAuth], async (req, res) => {
+  const { thoughtId } = req.body;
+  if (!thoughtId) {
+    return res.status(400).json({ message: 'Missing parameters <thoughtId>' });
+  }
+
+  try {
+    // find thought by id
+    const thought = await Thought.findOne({
+      where: { id: thoughtId },
+    });
+    if (!thought) {
+      throw new Error("Couldn't find thought!");
+    }
+    await thought.destroy();
+    return res.json({ message: 'Success' });
+  } catch (error) {
+    console.error(error.message);
     return res.status(500).json({ message: error.message });
   }
 });

@@ -19,4 +19,18 @@ const auth = (req, res, next) => {
   next();
 };
 
-module.exports = { setAuth, auth };
+const reAuth = (req, res, next) => {
+  if ('token' in req.cookies) {
+    user = req.user;
+    delete user.iat;
+    delete user.exp;
+    const jwtToken = jwt.sign({ ...user }, process.env.JWT_SECRET, {
+      expiresIn: 3000,
+    });
+    res.cookie('token', jwtToken);
+  }
+
+  next();
+};
+
+module.exports = { setAuth, auth, reAuth };

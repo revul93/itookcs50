@@ -1,12 +1,12 @@
 // modules
 const express = require('express');
-const helmet = require('helmet');
 const path = require('path');
+const helmet = require('helmet');
 
 // express middleware
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const { setAuth } = require('./middleware');
+const { setAuth, useHelmet } = require('./middleware');
 
 // setting env file
 require('dotenv').config();
@@ -19,6 +19,7 @@ const app = express();
 const router = require('./router');
 app.set('view engine', 'pug');
 app.locals.pretty = true;
+
 // use middleware
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));

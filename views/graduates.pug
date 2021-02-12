@@ -1,30 +1,31 @@
 extends layout.pug
 
 block body
-    h2.text-center.bg-dark.text-light.p-2.mt-3 Latest thoughts from CS50 takers!
+    h2.text-center.bg-dark.text-light.p-2.mt-3 CS50 Graduates!
     if (user)
-        a.btn.btn-outline-warning.btn-lg.m-3(href="/share-thought") + Share thought
+        a.btn.btn-outline-warning.btn-lg.m-3(href="/iAmGraduate") Did you graduate ? Share your final project
     else
-        a.btn.btn-outline-warning.btn-lg.m-3(href="/ghlogin") Login to share your thoughts
-    if (!thoughts || thoughts.length == 0)
-        h3.text-center.text-warning.p-3.m-5 No thoughts shared yet!
+        a.btn.btn-outline-warning.btn-lg.m-3(href="/ghlogin") Login to share your graduation post
+
+    if (!graduates)
+        h3.text-center.text-warning.p-3.m-5 No graduates registered yet!
     else
         ul.list-unstyled.d-flex.flex-column.align-items-center
-            each thought in thoughts
+            each graduate in graduates
                 - var thumbs = JSON.parse(thought.thumbs)
-                - var isThumbed = user && thumbs && thumbs.includes(user.id)
+                - var isThumbed = user && thumb && thumbs.includes(user.id)
                 li.w-100.m-3.p-4.text-dark.border.border-dark.rounded.d-flex.flex-column.thought-box
                     div.d-flex.flex-row
                         img.thought-user-image(src=thought.User.profile_picture)
                         a.link.font-weight-bold.align-self-center.m-3(target="_blank" href=`${thought.User.github_profile}`)= thought.User.name
                     hr.m-2.border.rounded
-                    .thought-subject.bigger-text= thought.subject
-                    .big-text.m-2= `${thought.text}`
-                    .thought-date.small-text.pt-2= new Date(thought.createdAt).toGMTString()
+                    .thought-subject= thought.subject
+                    .thought-text.m-2= `${thought.text}`
+                    .thought-date.pt-2= new Date(thought.createdAt).toGMTString()
                     .d-flex.flex-row.justify-content-center.mt-3
                         .w-100.text-center
                             i.btn.thumb-icon.fa.fa-2x.text-dark(class=isThumbed ? 'fa-thumbs-up' : 'fa-thumbs-o-up' onClick=`thumb(event, ${user && user.id})` aria-hidden="true" data-id=thought.id)
-                            span.big-text.m-3.text-dark.thumb-counter= thumbs ? thumbs.length : 0
+                            span.thumb-counter.m-3.text-dark.thumb-counter= thumbs ? thumbs.length : 0
                         if user && user.id === thought.User.id
                             .flex-shrink-1
                                 i.btn.thumb-icon.fa.fa-trash.fa-2x.text-danger(onClick=`deleteThought(event, ${user && user.id})` aria-hidden="true" data-id=thought.id)

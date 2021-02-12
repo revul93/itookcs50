@@ -9,6 +9,15 @@ body {
   height: 100%;
 }
 
+a,
+a:hover {
+  color: var(--warning);
+}
+
+.container {
+  min-height: 75%;
+}
+
 .navbar {
   padding: 0;
 }
@@ -68,8 +77,13 @@ hr {
   width: 48px;
 }
 
-.thought-text {
-  font-size: 1.3rem;
+.thought-subject {
+  font-weight: bold;
+}
+
+.thought-date {
+  opacity: 0.85;
+  font-weight: lighter;
 }
 
 .thumb-button {
@@ -80,10 +94,34 @@ hr {
   outline: none;
 }
 
-.thumb-counter {
+.info-card {
+  max-width: 500px;
+}
+
+.end {
+  position: absolute;
+  bottom: 0;
+}
+
+.big-text {
   font-size: 1.1rem;
 }
 
+.bigger-text {
+  font-size: 1.3rem;
+}
+
+.small-text {
+  font-size: 0.8rem;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
 }

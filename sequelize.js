@@ -7,7 +7,7 @@ const sequelize = new Sequelize(
   `sqlite://${prodMode ? 'prod' : 'dev'}DB.sqlite`,
   {
     logging: false,
-  },
+  }
 );
 
 // Model definition
@@ -26,7 +26,12 @@ const User = sequelize.define('User', {
   },
   github_profile: DataTypes.STRING,
   profile_picture: DataTypes.STRING,
+  isGraduated: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
 });
+
 const Project = sequelize.define('Project', {
   title: {
     type: DataTypes.STRING,
@@ -35,7 +40,8 @@ const Project = sequelize.define('Project', {
   description: DataTypes.STRING,
   url: DataTypes.STRING,
   screenshot: DataTypes.STRING,
-  thump_counter: DataTypes.INTEGER,
+  youtube_url: DataTypes.STRING,
+  thumbs: DataTypes.STRING,
 });
 
 const Thought = sequelize.define('Thought', {
@@ -51,6 +57,7 @@ const Thought = sequelize.define('Thought', {
     type: DataTypes.STRING,
   },
 });
+
 const Comment = sequelize.define('Comment', {
   text: {
     type: DataTypes.STRING,
