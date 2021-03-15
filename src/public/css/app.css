@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-size: 1rem;
+  height: 100%;
+}
+
+a,
+a:hover {
+  color: var(--warning);
+}
+
+.container {
+  min-height: 75%;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.link {
+  color: var(--primary);
+}
+
+.link:hover {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.big-text {
+  font-size: 1.1rem;
+}
+
+.bigger-text {
+  font-size: 1.3rem;
+}
+
+.small-text {
+  font-size: 0.8rem;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/***** CHECK *****/
+
+.info-card {
+  max-width: 500px;
+}
+
+.end {
+  position: absolute;
+  bottom: 0;
+}

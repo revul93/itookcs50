@@ -4,25 +4,30 @@
   "description": "itookcs50 is a place for CS50 graduates to share thoughts",
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.21.0",
-    "body-parser": "^1.19.0",
+    "@prisma/client": "^2.18.0",
+    "axios": "^0.21.1",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^4.1.1",
     "jsonwebtoken": "^8.5.1",
-    "pug": "^3.0.0",
-    "sequelize": "^6.3.5",
+    "pug": "^3.0.2",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "chalk": "^4.1.0",
-    "cookie-parser": "^1.4.5",
-    "dotenv": "^8.2.0",
+    "jsdoc": "^3.6.6",
+    "mocha": "^8.3.2",
     "nodemon": "^2.0.6",
-    "sequelize-cli": "^6.2.0"
+    "prisma": "^2.18.0",
+    "should": "^13.2.3"
   },
   "scripts": {
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha src/test",
+    "dev": "nodemon -r dotenv src/app.js"
+  },
+  "prisma": {
+    "schema": "src/config/schema.prisma"
   },
   "repository": {
     "type": "git",

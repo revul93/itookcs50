@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URI")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id String @id @default(cuid())
+  name String
+  email String @unique
+  avatar String
+  githubUrl String
+  thoughts Thought[]
+  comments Comment[]
+  thumbs Thumb[]
+  createdAt DateTime @default(now())
+}
+
+model Thought {
+  id String @id @default(cuid())
+  subject String
+  text String
+  thumbs Thumb[]
+  authorId String
+  author User @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Comment {
+  id String @id @default(cuid())
+  text String
+  authorId String
+  author User @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Thumb {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  thoughtId String
+  thought Thought @relation(fields: [thoughtId], references: [id])
+  createdAt DateTime @default(now())
+}

@@ -1,0 +1,14 @@
+.navbar {
+  padding: 0;
+}
+
+.navbar-link {
+  color: var(--dark);
+  font-size: 120%;
+}
+
+.navbar-link:hover {
+  text-decoration: none;
+  color: var(--light);
+  background-color: var(--dark);
+}

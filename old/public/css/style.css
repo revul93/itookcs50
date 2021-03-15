@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
 }
@@ -16,9 +16,23 @@ a:hover {
 
 .container {
   min-height: 75%;
+} */
+
+/* .active {
+  font-weight: bold;
 }
 
-.navbar {
+.link {
+  color: var(--primary);
+}
+
+.link:hover {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: bold;
+} */
+
+/* .navbar {
   padding: 0;
 }
 
@@ -31,46 +45,22 @@ a:hover {
   text-decoration: none;
   color: var(--light);
   background-color: var(--dark);
-}
+} */
 
-.active {
-  font-weight: bold;
-}
-
-.link {
-  color: var(--primary);
-}
-
-.link:hover {
-  text-decoration: none;
-  color: var(--primary);
-  font-weight: bold;
-}
-
-.form-label {
+/* .form-label {
   font-size: 125%;
 }
 
 .submit-spinner {
   width: 80px;
   height: 50px;
-}
+} */
 
+/* 
 .thought-box {
   -webkit-box-shadow: 8px 6px 18px 3px #000000;
   box-shadow: 8px 6px 18px 3px #000000;
   background-color: rgb(233, 227, 227);
-}
-
-hr {
-  padding: 1.5px;
-  background: rgb(93, 96, 18);
-  background: linear-gradient(
-    90deg,
-    rgba(93, 96, 18, 1) 4%,
-    rgba(230, 237, 59, 1) 51%,
-    rgba(93, 96, 18, 1) 91%
-  );
 }
 
 .thought-user-image {
@@ -92,18 +82,29 @@ hr {
 
 .thumb-button:focus {
   outline: none;
-}
+} */
 
-.info-card {
+/* hr {
+  padding: 1.5px;
+  background: rgb(93, 96, 18);
+  background: linear-gradient(
+    90deg,
+    rgba(93, 96, 18, 1) 4%,
+    rgba(230, 237, 59, 1) 51%,
+    rgba(93, 96, 18, 1) 91%
+  );
+} */
+
+/* .info-card {
   max-width: 500px;
 }
 
 .end {
   position: absolute;
   bottom: 0;
-}
+} */
 
-.big-text {
+/* .big-text {
   font-size: 1.1rem;
 }
 
@@ -121,28 +122,33 @@ hr {
 
 .cursor-pointer {
   cursor: pointer;
-}
-/* Small devices (landscape phones, 576px and up) */
+} */
+
+/* 
+
+ Small devices (landscape phones, 576px and up) 
 @media (min-width: 576px) {
 }
 
-/* Medium devices (tablets, 768px and up) */
+ Medium devices (tablets, 768px and up) 
 @media (min-width: 768px) {
   .navbar {
     padding: 0 5%;
   }
 }
 
-/* Large devices (desktops, 992px and up) */
+ Large devices (desktops, 992px and up) 
 @media (min-width: 992px) {
   .navbar {
     padding: 0 7.5%;
   }
 }
 
-/* Extra large devices (large desktops, 1200px and up) */
+ Extra large devices (large desktops, 1200px and up) 
 @media (min-width: 1200px) {
   .navbar {
     padding: 0 10%;
   }
-}
+} 
+
+*/
